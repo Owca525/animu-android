@@ -1,0 +1,1 @@
+ /home/zomi/Documents/animu-mobile/animu-android/.dart_tool/flutter_build/36f58d00dc5a5f972b14184872e47840/native_assets.json: 
