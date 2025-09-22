@@ -32,6 +32,13 @@ class MainApp extends StatelessWidget {
             }
           },
         ),
+        bottomNavigationBar: NavigationBar(destinations: [
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.list), label: "AnimeList"),
+          NavigationDestination(icon: Icon(Icons.history), label: "History"),
+          NavigationDestination(icon: Icon(Icons.event), label: "Calendary"),
+          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+        ]),
       ),
     );
   }
