@@ -1,4 +1,6 @@
 import 'package:animu/UI/defcard.dart';
+import 'package:animu/utils/anilistAPI.dart';
+import 'package:animu/utils/class.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,15 +10,27 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-@override
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp( // Root widget
-      home: Scaffold(      
-        body: Container(
-          child: Defcard(
-            imageUrl: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178788-zm3gtpB9TpRt.jpg',
-            title: 'Kimetsu no Yaiba: Mugenjou-hen Movie 1 - Akaza Sairai'
-          ),
+    return MaterialApp(
+      // Root widget
+      home: Scaffold(
+        body: FutureBuilder<List<AnimeData>>(
+          future: an_allTimePopularAnime(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (snapshot.hasData) {
+              final anime = snapshot.data![0];
+              return Center(
+                child: Defcard(imageUrl: anime.coverImage ?? "", title: anime.title.romaji),
+              );
+            } else {
+              return const Center(child: Text('Missing'));
+            }
+          },
         ),
       ),
     );

@@ -34,3 +34,4 @@ google-services.json
 *.hprof
 
 .dart_tool
+pubspec.lock
