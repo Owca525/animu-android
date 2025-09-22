@@ -25,7 +25,7 @@ class MainApp extends StatelessWidget {
             } else if (snapshot.hasData) {
               final anime = snapshot.data![0];
               return Center(
-                child: Defcard(imageUrl: anime.coverImage ?? "", title: anime.title.romaji),
+                child: Defcard(anime: anime),
               );
             } else {
               return const Center(child: Text('Missing'));
