@@ -188,8 +188,46 @@ const allPopular = {
   "type": "ANIME"
 };
 
+const trendingNow = {
+  "page": 1,
+  "sort": ["TRENDING_DESC", "POPULARITY_DESC"],
+  "type": "ANIME"
+};
+
+const thisSeasonPopular = {
+  "page": 1,
+  "season": "SUMMER",
+  "seasonYear":	2025,
+  "type": "ANIME"
+};
+
+
 Future<List<AnimeData>> an_allTimePopularAnime() async {
   final data = await sendGraphQL(graphicApi, allPopular);
+  if (!data["succes"]) return [];
+  final animeList = data["data"]["data"]["Page"]["media"] as List<dynamic>;
+  List<AnimeData> converted = []; 
+  for (var i = 0; i < animeList.length; i++) {
+    converted.add(AnimeData.fromJson(animeList[i]));
+  }
+
+  return converted;
+}
+
+Future<List<AnimeData>> an_trendingNow() async {
+  final data = await sendGraphQL(graphicApi, trendingNow);
+  if (!data["succes"]) return [];
+  final animeList = data["data"]["data"]["Page"]["media"] as List<dynamic>;
+  List<AnimeData> converted = []; 
+  for (var i = 0; i < animeList.length; i++) {
+    converted.add(AnimeData.fromJson(animeList[i]));
+  }
+
+  return converted;
+}
+
+Future<List<AnimeData>> an_thisSeasonPopular() async {
+  final data = await sendGraphQL(graphicApi, thisSeasonPopular);
   if (!data["succes"]) return [];
   final animeList = data["data"]["data"]["Page"]["media"] as List<dynamic>;
   List<AnimeData> converted = []; 

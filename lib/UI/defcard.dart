@@ -4,41 +4,35 @@ import 'package:flutter/material.dart';
 class Defcard extends StatelessWidget {
   final AnimeData anime;
 
-  const Defcard({Key? key, required this.anime})
-    : super(key: key);
+  const Defcard({Key? key, required this.anime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // Root widget
-      home: Scaffold(
-        body: Container(
-          width: 150,
-          height: 248,
-          padding: EdgeInsets.all(5.0),
-          decoration: BoxDecoration(
+    return Container(
+      width: 115,
+      height: 205,
+      padding: EdgeInsets.all(4.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            color: const Color.fromARGB(255, 0, 0, 0),
+            child: Image.network(anime.coverImage ?? "", fit: BoxFit.fill, height: 150,),
           ),
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16), // round all corners
-                child: Image.network(anime.coverImage ?? "", fit: BoxFit.cover),
-              ),
-              Text(
-                anime.title.romaji,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontStyle: FontStyle.normal,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+          SizedBox(height: 8),
+          Text(
+            anime.title.romaji,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 14,
+              fontStyle: FontStyle.normal,
+              color: Colors.white,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
