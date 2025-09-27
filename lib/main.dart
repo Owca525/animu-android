@@ -39,11 +39,11 @@ class _Homepage extends State<Homepage> {
     return Scaffold(
         body: pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", backgroundColor: Color.fromARGB(255, 0, 0, 0), ),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: "AnimeList", backgroundColor: Color.fromARGB(255, 0, 0, 0)),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: "History", backgroundColor: Color.fromARGB(255, 0, 0, 0)),
-          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Calendary", backgroundColor: Color.fromARGB(255, 0, 0, 0)),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings", backgroundColor: Color.fromARGB(255, 0, 0, 0)),        
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home", backgroundColor: Color.fromARGB(255, 23, 23, 23), ),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: "AnimeList", backgroundColor: Color.fromARGB(255, 23, 23, 23)),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: "History", backgroundColor: Color.fromARGB(255, 23, 23, 23)),
+          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Calendary", backgroundColor: Color.fromARGB(255, 23, 23, 23)),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings", backgroundColor: Color.fromARGB(255, 23, 23, 23)),        
         ],
         selectedItemColor: Color.fromARGB(255, 255, 255, 255),
         currentIndex: _currentIndex,

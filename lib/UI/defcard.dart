@@ -9,9 +9,9 @@ class Defcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 115,
-      height: 205,
-      padding: EdgeInsets.all(4.0),
+      width: MediaQuery.of(context).size.height * 0.12,
+      height: MediaQuery.of(context).size.height * 0.22,
+      padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.006),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -19,15 +19,15 @@ class Defcard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: Image.network(anime.coverImage ?? "", fit: BoxFit.fill, height: 150,),
+            child: Image.network(anime.coverImage ?? "", fit: BoxFit.fill, height: MediaQuery.of(context).size.height * 0.16),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 4),
           Text(
             anime.title.romaji,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: MediaQuery.of(context).size.height * 0.015,
               fontStyle: FontStyle.normal,
               color: Colors.white,
             ),

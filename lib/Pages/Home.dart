@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 17, 17, 17),
       body: SingleChildScrollView(     
         child: Column(
           children: [
@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
               child: Stack(
                 children: [
                   TrendingCarousel(),
-                  Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1, vertical: MediaQuery.of(context).size.width * 0.1),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1, vertical: MediaQuery.of(context).size.height * 0.055),
                     child: SearchBar(
                       trailing: [
                         IconButton(
@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
                       backgroundColor: WidgetStateProperty.all(Color.fromARGB(101, 0, 0, 0)),
                       elevation: WidgetStateProperty.all(0),
                       side: WidgetStateProperty.all(
-                        BorderSide(color: Color.fromARGB(255, 17, 17, 17), width: 1),
+                        BorderSide(color: Color.fromARGB(255, 17, 17, 17), width: MediaQuery.of(context).size.width * 0.005),
                       ),
                     )
                   ),
@@ -42,17 +42,17 @@ class Home extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01, vertical: MediaQuery.of(context).size.height * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Popular in this Season',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.024, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     SizedBox(
-                      height: 210,
+                      height: MediaQuery.of(context).size.height * 0.22,
                       child: FutureBuilder<Map<String, List<AnimeData>>>(
                         future: an_getMainPage(),
                         builder: (context, snapshot) {
@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               children: seasonPopular.map((anime) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
+                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01),
                                   child: Defcard(anime: anime),
                                 );
                               }).toList(),
@@ -82,17 +82,17 @@ class Home extends StatelessWidget {
                 ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01, vertical: MediaQuery.of(context).size.height * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'All Time Popular',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.024, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     SizedBox(
-                      height: 210,
+                      height: MediaQuery.of(context).size.height * 0.22,
                       child: FutureBuilder<Map<String, List<AnimeData>>>(
                         future: an_getMainPage(),
                         builder: (context, snapshot) {
@@ -107,7 +107,7 @@ class Home extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               children: seasonPopular.map((anime) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
+                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01),
                                   child: Defcard(anime: anime),
                                 );
                               }).toList(),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animu/utils/class.dart';
 import 'package:flutter/material.dart';
 
@@ -10,19 +12,28 @@ class Defcardv2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: 250,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: Stack(
         children: [
           // Banner
           ClipRRect(
-            child: Image.network(
-              anime.bannerImage ?? "",
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
-                  Container(color: Colors.grey[800]),
-            ),
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 2, sigmaY: 3),
+                child: Image.network(
+                  anime.bannerImage ?? "",
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                  Transform.scale(
+                    scale: MediaQuery.of(context).size.height * 0.003,
+                    child: Image.network(
+                      anime.coverImage ?? "",
+                      width: MediaQuery.of(context).size.width,
+                    )
+                  )    
+                ),
+              ),
           ),
 
           // Gradient
@@ -33,9 +44,9 @@ class Defcardv2 extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   Colors.transparent,
-                  Color.fromARGB(160, 0, 0, 0),
-                  Color.fromARGB(193, 0, 0, 0),
-                  Color.fromARGB(255, 0, 0, 0),
+                  Color.fromARGB(159, 17, 17, 17),
+                  Color.fromARGB(193, 17, 17, 17),
+                  Color.fromARGB(255, 17, 17, 17),
                 ],
               ),
             ),
@@ -43,7 +54,7 @@ class Defcardv2 extends StatelessWidget {
 
           // Cover + Tekst
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 114),
+            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.06, right: MediaQuery.of(context).size.width * 0.02, bottom: MediaQuery.of(context).size.height * 0.02, top: MediaQuery.of(context).size.height * 0.13),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -52,15 +63,15 @@ class Defcardv2 extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
                     anime.coverImage ?? "",
-                    width: 80,
-                    height: 120,
+                    width: MediaQuery.of(context).size.width * 0.21,
+                    height: MediaQuery.of(context).size.height * 0.28,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) =>
-                        Container(width: 80, height: 120, color: Colors.grey),
+                        Container(width: MediaQuery.of(context).size.width * 0.21, height: MediaQuery.of(context).size.height * 0.28, color: const Color.fromARGB(255, 105, 105, 105)),
                   ),
                 ),
 
-                const SizedBox(width: 16),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.04),
 
                 // Tekst
                 Expanded(
@@ -71,20 +82,20 @@ class Defcardv2 extends StatelessWidget {
                         anime.title.romaji,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: MediaQuery.of(context).size.height * 0.02,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.008),
                       Text(
                         anime.title.english ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white70,
-                          fontSize: 14,
+                          fontSize: MediaQuery.of(context).size.height * 0.015,
                         ),
                       ),
                     ],

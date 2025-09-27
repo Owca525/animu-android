@@ -61,7 +61,7 @@ class _TrendingCarouselState extends State<TrendingCarousel> {
         }
 
         return SizedBox(
-          height: 220,
+          height: MediaQuery.of(context).size.height * 0.28,
           width: double.infinity,
           child: PageView.builder(
             controller: _pageController,
