@@ -26,13 +26,13 @@ class _TrendingCarouselState extends State<TrendingCarousel> {
 
   void _startAutoScroll() {
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       if (_pageController.hasClients && _totalPages > 0) {
         _currentPage++;
         if (_currentPage >= _totalPages) _currentPage = 0;
         _pageController.animateToPage(
           _currentPage,
-          duration: const Duration(milliseconds: 3000),
+          duration: const Duration(milliseconds: 2000),
           curve: Curves.easeInOut,
         );
       }
