@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
                       backgroundColor: WidgetStateProperty.all(Color.fromARGB(101, 0, 0, 0)),
                       elevation: WidgetStateProperty.all(0),
                       side: WidgetStateProperty.all(
-                        BorderSide(color: Color.fromARGB(255, 17, 17, 17), width: MediaQuery.of(context).size.width * 0.005),
+                        BorderSide(color: Color.fromARGB(255, 31, 31, 31), width: MediaQuery.of(context).size.width * 0.005),
                       ),
                     )
                   ),
@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01, vertical: MediaQuery.of(context).size.height * 0.01),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.03, vertical: MediaQuery.of(context).size.height * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -82,7 +82,7 @@ class Home extends StatelessWidget {
                 ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01, vertical: MediaQuery.of(context).size.height * 0.01),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.03, vertical: MediaQuery.of(context).size.height * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
