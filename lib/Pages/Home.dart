@@ -20,6 +20,14 @@ class Home extends StatelessWidget {
                   TrendingCarousel(),
                   Padding(padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1, vertical: MediaQuery.of(context).size.width * 0.1),
                     child: SearchBar(
+                      trailing: [
+                        IconButton(
+                          icon: const Icon(Icons.search, color: Colors.white70),
+                          onPressed: () {
+                    
+                          },
+                        ),
+                      ],
                       textStyle: MaterialStateProperty.all(TextStyle(color: Colors.white)),
                       hintText: 'Search...',
                       hintStyle: MaterialStateProperty.all(TextStyle(color: Colors.white)),
