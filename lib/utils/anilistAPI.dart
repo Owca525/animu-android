@@ -287,7 +287,6 @@ Map<String, dynamic> getSeasonFromDate() {
   final now = DateTime.now();
   final month = now.month;
   final year = now.year;
-
   String season;
 
   if (month >= 1 && month <= 3) {
@@ -306,54 +305,27 @@ Map<String, dynamic> getSeasonFromDate() {
   };
 }
 
-// TODO: Remove
-Future<List<AnimeData>> an_allTimePopularAnime() async {
-  final data = await sendGraphQL(graphicApi, allPopular);
-  if (!data["succes"]) return [];
-  final animeList = data["data"]["data"]["Page"]["media"] as List<dynamic>;
-  List<AnimeData> converted = []; 
-  for (var i = 0; i < animeList.length; i++) {
-    converted.add(AnimeData.fromJson(animeList[i]));
-  }
-
-  return converted;
-}
-
-// TODO: Remove
-Future<List<AnimeData>> an_trendingNow() async {
-  final data = await sendGraphQL(graphicApi, trendingNow);
-  if (!data["succes"]) return [];
-  final animeList = data["data"]["data"]["Page"]["media"] as List<dynamic>;
-  List<AnimeData> converted = []; 
-  for (var i = 0; i < animeList.length; i++) {
-    converted.add(AnimeData.fromJson(animeList[i]));
-  }
-
-  return converted;
-}
-
-// TODO: Remove
-Future<List<AnimeData>> an_thisSeasonPopular() async {
-  final data = await sendGraphQL(graphicApi, thisSeasonPopular);
-  if (!data["succes"]) return [];
-  final animeList = data["data"]["data"]["Page"]["media"] as List<dynamic>;
-  List<AnimeData> converted = []; 
-  for (var i = 0; i < animeList.length; i++) {
-    converted.add(AnimeData.fromJson(animeList[i]));
-  }
-
-  return converted;
-}
-
 Future<Map<String, List<AnimeData>>> an_getMainPage() async {
   final season = getSeasonFromDate();
   final data = await sendGraphQL(graphicMainPageApi, { "season": season.season, "seasonYear": season.seasonYear });
   if (!data["succes"]) return { "trending": [], "seasonPopular": [], "allTime": [] };
 
+  final trending = (data["data"]["data"]["trending"]["media"] as List)
+      .map((e) => AnimeData.fromJson(e))
+      .toList();
+
+  final seasonPopular = (data["data"]["data"]["season"]["media"] as List)
+      .map((e) => AnimeData.fromJson(e))
+      .toList();
+
+  final allTime = (data["data"]["data"]["popular"]["media"] as List)
+      .map((e) => AnimeData.fromJson(e))
+      .toList();
+
   return { 
-    "trending": data["data"]["data"]["trending"]["media"], 
-    "seasonPopular": data["data"]["data"]["season"]["media"], 
-    "allTime": data["data"]["data"]["popular"]["media"]
+    "trending": trending, 
+    "seasonPopular": seasonPopular, 
+    "allTime": allTime
   };
 }
 

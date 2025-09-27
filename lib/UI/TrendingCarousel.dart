@@ -41,15 +41,16 @@ class _TrendingCarouselState extends State<TrendingCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<AnimeData>>(
-      future: an_trendingNow(),
+    return FutureBuilder<Map<String, List<AnimeData>>>(
+      future: an_getMainPage(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
 
-        final animeList = snapshot.data!;
+        final data = snapshot.data!;
+        final List<AnimeData> trending = data['trending'] ?? [];
 
-        if (_totalPages != animeList.length) {
-          _totalPages = animeList.length;
+        if (_totalPages != trending.length) {
+          _totalPages = trending.length;
           _currentPage = 0;
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (_pageController.hasClients) {
@@ -64,9 +65,10 @@ class _TrendingCarouselState extends State<TrendingCarousel> {
           width: double.infinity,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: animeList.length,
+            itemCount: trending.length,
             itemBuilder: (context, index) {
-              return Defcardv2(anime: animeList[index]);
+              final anime = trending[index];
+              return Defcardv2(anime: anime);
             },
             onPageChanged: (index) {
               _currentPage = index;

@@ -24,13 +24,13 @@ class Home extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.search, color: Colors.white70),
                           onPressed: () {
-                    
+                            
                           },
                         ),
                       ],
-                      textStyle: MaterialStateProperty.all(TextStyle(color: Colors.white)),
+                      textStyle: WidgetStateProperty.all(TextStyle(color: Colors.white)),
                       hintText: 'Search...',
-                      hintStyle: MaterialStateProperty.all(TextStyle(color: Colors.white)),
+                      hintStyle: WidgetStateProperty.all(TextStyle(color: Colors.white)),
                       backgroundColor: WidgetStateProperty.all(Color.fromARGB(101, 0, 0, 0)),
                       elevation: WidgetStateProperty.all(0),
                       side: WidgetStateProperty.all(
@@ -53,25 +53,31 @@ class Home extends StatelessWidget {
                     SizedBox(height: 8),
                     SizedBox(
                       height: 210,
-                      child: FutureBuilder<List<AnimeData>>(
-                      future: an_thisSeasonPopular(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
-                          return Center(child: Text('Error: ${snapshot.error}'));
-                        } else if (snapshot.hasData) {
-                          final anime = snapshot.data!;
-                          return ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: anime.map((anime) => Padding(padding: const EdgeInsets.only(right: 8.0), child: Defcard(anime: anime),
-                            )).toList(),
-                          );
-                        } else {
-                          return const Center(child: Text('Missing'));
-                        }
-                      },
-                    ),)
+                      child: FutureBuilder<Map<String, List<AnimeData>>>(
+                        future: an_getMainPage(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text('Error: ${snapshot.error}'));
+                          } else if (snapshot.hasData) {
+                            final data = snapshot.data!;
+                            final seasonPopular = data["seasonPopular"] ?? [];
+                            return ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: seasonPopular.map((anime) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Defcard(anime: anime),
+                                );
+                              }).toList(),
+                            );
+                          } else {
+                            return const Center(child: Text('Missing'));
+                          }
+                        },
+                      ),
+                    )
                   ],
                 ),
             ),
@@ -87,25 +93,31 @@ class Home extends StatelessWidget {
                     SizedBox(height: 8),
                     SizedBox(
                       height: 210,
-                      child: FutureBuilder<List<AnimeData>>(
-                      future: an_allTimePopularAnime(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
-                          return Center(child: Text('Error: ${snapshot.error}'));
-                        } else if (snapshot.hasData) {
-                          final anime = snapshot.data!;
-                          return ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: anime.map((anime) => Padding(padding: const EdgeInsets.only(right: 8.0), child: Defcard(anime: anime),
-                            )).toList(),
-                          );
-                        } else {
-                          return const Center(child: Text('Missing'));
-                        }
-                      },
-                    ),)
+                      child: FutureBuilder<Map<String, List<AnimeData>>>(
+                        future: an_getMainPage(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text('Error: ${snapshot.error}'));
+                          } else if (snapshot.hasData) {
+                            final data = snapshot.data!;
+                            final seasonPopular = data["allTime"] ?? [];
+                            return ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: seasonPopular.map((anime) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Defcard(anime: anime),
+                                );
+                              }).toList(),
+                            );
+                          } else {
+                            return const Center(child: Text('Missing'));
+                          }
+                        },
+                      ),
+                    )
                   ],
                 ),
             ),
